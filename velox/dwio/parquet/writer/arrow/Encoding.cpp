@@ -18,7 +18,6 @@
 
 #include "velox/dwio/parquet/writer/arrow/Encoding.h"
 
-#include <glog/logging.h>
 #include <algorithm>
 #include <cstdint>
 #include <cstdlib>
@@ -29,6 +28,8 @@
 #include <string_view>
 #include <utility>
 #include <vector>
+
+#include <glog/logging.h>
 
 #include "arrow/array.h"
 #include "arrow/array/builder_dict.h"
