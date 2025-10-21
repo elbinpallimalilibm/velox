@@ -232,6 +232,12 @@ function install_arrow {
 function install_thrift {
   wget_and_untar https://github.com/apache/thrift/archive/"${THRIFT_VERSION}".tar.gz thrift
 
+  ABSOLUTE_SCRIPTDIR=$(realpath "$SCRIPT_DIR")
+  THRIFT_UNLIKELY_PATCH="$ABSOLUTE_SCRIPTDIR/../CMake/resolve_dependency_modules/thrift/thrift-unlikely-fix.patch"
+
+  cd "$DEPENDENCY_DIR/thrift" || exit 1
+  git apply "$THRIFT_UNLIKELY_PATCH"
+
   EXTRA_CXXFLAGS="-O3 -fPIC"
   # Clang will generate warnings and they need to be suppressed, otherwise the build will fail.
   if [[ ${USE_CLANG} != "false" ]]; then
