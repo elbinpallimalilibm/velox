@@ -24,6 +24,18 @@
 #include <folly/String.h>
 #include <folly/synchronization/CallOnce.h>
 #include <gflags/gflags.h>
+
+// Fix Arrow/glog DCHECK redefinition conflict
+#ifdef DCHECK
+  #undef DCHECK
+  #undef DCHECK_EQ
+  #undef DCHECK_NE
+  #undef DCHECK_LE
+  #undef DCHECK_LT
+  #undef DCHECK_GE
+  #undef DCHECK_GT
+#endif
+
 #include <glog/logging.h>
 
 #include "velox/common/process/StackTrace.h"
