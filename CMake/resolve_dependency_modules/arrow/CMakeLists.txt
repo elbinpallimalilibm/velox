@@ -43,6 +43,8 @@ if(VELOX_ENABLE_ARROW)
     -DCMAKE_POLICY_VERSION_MINIMUM=3.5
     # Remove with Arrow upgrade to Arrow 20.
     -DARROW_CXXFLAGS=-Wno-documentation
+    -DHAVE_FDOPEN=1
+    -DZLIB_ENABLE_TESTS=OFF 
   )
   set(ARROW_LIBDIR ${ARROW_PREFIX}/install/${CMAKE_INSTALL_LIBDIR})
 
