@@ -197,6 +197,8 @@ function install_simdjson {
 }
 
 function install_arrow {
+  VELOX_SCRIPTDIR=$(realpath "$SCRIPT_DIR")
+
   wget_and_untar https://github.com/apache/arrow/archive/apache-arrow-"${ARROW_VERSION}".tar.gz arrow
   (
     # Can be removed after an upgrade to Arrow 20.0.0
@@ -208,6 +210,10 @@ function install_arrow {
 
     cd "$DEPENDENCY_DIR"/arrow || exit 1
     git apply "$VELOX_ARROW_CMAKE_PATCH"
+
+    cd "$DEPENDENCY_DIR"/arrow || exit 1
+    ZUTIL_CMAKE_PATCH="$ABSOLUTE_SCRIPTDIR/../CMake/resolve_dependency_modules/arrow/zutil-cmake.patch"
+    git apply "$ZUTIL_CMAKE_PATCH"
   ) || exit 1
 
   cmake_install_dir arrow/cpp \
@@ -226,6 +232,7 @@ function install_arrow {
     -DCMAKE_BUILD_TYPE=Release \
     -DARROW_BUILD_STATIC=ON \
     -DBOOST_ROOT="$INSTALL_PREFIX" \
+    -DVELOX_SCRIPTDIR="$VELOX_SCRIPTDIR" \
     $EXTRA_ARROW_OPTIONS
 }
 

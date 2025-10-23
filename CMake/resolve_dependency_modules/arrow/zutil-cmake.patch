@@ -1,0 +1,12 @@
+--- a/cpp/cmake_modules/ThirdpartyToolchain.cmake
++++ b/cpp/cmake_modules/ThirdpartyToolchain.cmake
+@@ -2439,6 +2439,9 @@ macro(build_zlib)
+                       URL ${ZLIB_SOURCE_URL}
+                       URL_HASH "SHA256=${ARROW_ZLIB_BUILD_SHA256_CHECKSUM}"
+                       BUILD_BYPRODUCTS "${ZLIB_STATIC_LIB}"
++                      PATCH_COMMAND ${CMAKE_COMMAND} -E copy
++                        ${VELOX_SCRIPTDIR}/../CMake/resolve_dependency_modules/arrow/zutil.h
++                        <SOURCE_DIR>/zutil.h
+                       CMAKE_ARGS ${ZLIB_CMAKE_ARGS})
+ 
+   file(MAKE_DIRECTORY "${ZLIB_PREFIX}/include")
