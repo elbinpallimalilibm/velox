@@ -208,10 +208,6 @@ function install_arrow {
 
     cd "$DEPENDENCY_DIR"/arrow || exit 1
     git apply "$VELOX_ARROW_CMAKE_PATCH"
-
-    VELOX_ARROW_FDOPEN_PATCH="$ABSOLUTE_SCRIPTDIR/../CMake/resolve_dependency_modules/arrow/fdopen-dont-redefine.patch"
-    cd "$DEPENDENCY_DIR"/arrow || exit 1
-    git apply "$VELOX_ARROW_FDOPEN_PATCH"
   ) || exit 1
 
   cmake_install_dir arrow/cpp \
